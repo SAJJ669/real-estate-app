@@ -6,7 +6,7 @@ import UserListing from '../_components/UserListing'
 
 function User() {
     return (
-        <div className='my-6 md:px-10 lg:px-32 w-full h-screen overflow-hidden py-10'>
+        <div className='my-6 md:px-10 lg:px-32 w-full h-screen overflow-hidden'>
             <UserProfile>
                 <UserProfile.Page
                     label='My Listing'

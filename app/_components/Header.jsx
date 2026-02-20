@@ -17,7 +17,7 @@ import {
     DropdownMenuGroup,
 } from "@/components/ui/dropdown-menu"
 import { User, Settings, LogOut, PlusCircle } from "lucide-react"
-
+import Aurora from './Aurora';
 const Header = () => {
 
     const { user, isSignedIn, isLoaded } = useUser();
@@ -31,7 +31,7 @@ const Header = () => {
     // }, [isLoaded]);
 
     return (
-        <div className="p-6 px-10 flex justify-between shadow-sm fixed top-0 w-full bg-background z-10">
+        <div className="p-3 px-10 flex justify-between shadow-sm fixed top-0 w-full bg-[#f1f3f4] z-10">
             <div className='flex gap-10 items-center'>
                 <Image src={'/logo.svg'} width={150} height={150} alt='Logo' />
                 <ul className='hidden md:flex gap-10'>
@@ -70,20 +70,18 @@ const Header = () => {
                                 <DropdownMenuSeparator />
 
                                 <DropdownMenuGroup>
-                                    <DropdownMenuItem>
-                                        <Link className="flex gap-2 items-center" href={'/user'}>
+                                    <Link className="flex gap-2 items-center" href={'/user'}>
+                                        <DropdownMenuItem className='w-full cursor-pointer'>
                                             <User className="mr-2 h-4 w-4" />
                                             <span>Profile</span>
-                                        </Link>
-                                    </DropdownMenuItem>
-                                    <DropdownMenuItem>
-                                        <PlusCircle className="mr-2 h-4 w-4" />
-                                        <span>My Listing</span>
-                                    </DropdownMenuItem>
-                                    <DropdownMenuItem>
-                                        <Settings className="mr-2 h-4 w-4" />
-                                        <span>Settings</span>
-                                    </DropdownMenuItem>
+                                        </DropdownMenuItem>
+                                    </Link>
+                                    <Link className="flex gap-2 items-center" href={'/user/my-listing'}>
+                                        <DropdownMenuItem className='w-full cursor-pointer'>
+                                            <PlusCircle className="mr-2 h-4 w-4" />
+                                            <span>My Listing</span>
+                                        </DropdownMenuItem>
+                                    </Link>
                                 </DropdownMenuGroup>
 
                                 <DropdownMenuSeparator />

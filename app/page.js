@@ -4,7 +4,7 @@ import ListingMapView from "./_components/ListingMapView";
 export default function Home() {
   return (
     <>
-      <div className="p-10">
+      <div className="bg-white px-10">
         <ListingMapView type='sell' />
       </div>
     </>

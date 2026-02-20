@@ -5,6 +5,7 @@ import { Bath, BedDouble, MapPin, Eye, Edit, Ruler, Trash } from 'lucide-react'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
+import { toast } from 'sonner'
 
 function UserListing() {
 
@@ -22,12 +23,38 @@ function UserListing() {
     setListing(data)
   }
 
+  const deleteListing = async (item) => {
+    try {
+      // 1. Delete images first (if not cascading)
+      await supabase
+        .from('listingImages')
+        .delete()
+        .eq('listing_id', item.id);
+
+      // 2. Delete the actual listing
+      const { error } = await supabase
+        .from('listing')
+        .delete()
+        .eq('id', item.id);
+
+      if (error) throw error;
+
+      // 3. Update UI state locally so the card disappears immediately
+      setListing((prev) => prev.filter(l => l.id !== item.id));
+
+      toast.success('Listing deleted successfully');
+    } catch (error) {
+      toast.error('Failed to delete listing');
+      console.error(error);
+    }
+  };
+
   return (
     <div>
       <h2 className='font-bold text-2xl'>Manage Your Listing</h2>
       <div className='grid grid-cols-1 md:grid-cols-2'>
         {listing.length > 0 ? listing.map((item, index) => (
-          <div key={item.id || index} className='relative p-3 hover:shadow-lg hover:shadow-emerald-900 rounded-lg transition cursor-pointer'>
+          <div key={item.id || index} className='relative p-3 border border-2 hover:shadow-lg hover:shadow-emerald-900 rounded-lg transition cursor-pointer'>
             <h2 className='absolute top-2 left-2 bg-brand-purple text-white px-2 py-1 text-sm rounded-lg'>{item.active ? 'Published' : 'Draft'}</h2>
             <Image alt="Property" src={item?.listingImages[0]?.url || '/placeholder.jpg'} width={800} height={150} className='rounded-lg object-cover h-[270px]' />
             <div className='flex mt-2 flex-col gap-2'>
@@ -54,12 +81,12 @@ function UserListing() {
                 </Link>
 
                 <Link href={`/edit-listing/${item.id}`} className="flex-1">
-                  <Button size="sm" className='w-full flex gap-1 bg-brand-purple hover:bg-purple-700'>
+                  <Button size="sm" className='w-full flex gap-1 bg-brand-purple hover:bg-violet-500'>
                     <Edit className="h-4 w-4" /> Edit
                   </Button>
                 </Link>
 
-                <Button size="sm" variant='destructive' className='px-3'>
+                <Button size="sm" variant='destructive' onClick={()=>{deleteListing(item)}} className='px-3'>
                   <Trash className="h-4 w-4" />
                 </Button>
               </div>

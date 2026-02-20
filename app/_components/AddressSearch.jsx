@@ -31,6 +31,7 @@ const AddressSearch = ({ setSelectedLocation }) => {
                     />
                 </GeoapifyContext>
             </div>
+            
         </div>
     )
 }

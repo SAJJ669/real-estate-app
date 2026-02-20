@@ -24,21 +24,21 @@ function Listing({ listing, handleSearchClick, searchedAddress, setBedroom, setB
             <div className='grid grid-cols-1 md:grid-cols-2 gap-10'>
                 {listing?.length > 0 ? listing.map((item, index) => (
                     <Link href={`/view-listing/${item.id}`}>
-                        <div key={item.id} className='p-3 hover:shadow-lg hover:shadow-emerald-900 rounded-lg transition cursor-pointer'>
+                        <div key={item.id} className='p-3 border border-2 hover:shadow-lg hover:shadow-emerald-900 rounded-lg transition cursor-pointer'>
                             <Image alt="Property" src={item.listingImages[0].url || '/placeholder.jpg'} width={800} height={150} className='rounded-lg object-cover h-[270px]' />
                             <div className='flex mt-2 flex-col gap-2'>
-                                <h2 className='font-bold text-xl'>${item.price}</h2>
+                                <h2 className='text-green-700 font-bold text-xl'>${item.price}</h2>
                                 <h2 className='flex gap-2 text-sm text-gray-500'>
-                                    <MapPin className='h-4 w-4 flex-shrink-0' />{item.address}
+                                    <MapPin className='h-4 w-4 flex-shrink-0 my-1' />{item.address}
                                 </h2>
                                 <div className='flex gap-2 justify-between'>
-                                    <h2 className='w-full flex gap-2 text-sm bg-slate-200 rounded-md p-2 text-gray-500 justify-center'>
+                                    <h2 className='w-full flex gap-2 text-sm bg-brand-purple rounded-md p-2 text-white justify-center'>
                                         <BedDouble className='h-4 w-4' />{item?.bedroom}
                                     </h2>
-                                    <h2 className='w-full flex gap-2 text-sm bg-slate-200 rounded-md p-2 text-gray-500 justify-center'>
+                                    <h2 className='w-full flex gap-2 text-sm bg-brand-purple rounded-md p-2 text-white justify-center'>
                                         <Bath className='h-4 w-4' />{item?.bathroom}
                                     </h2>
-                                    <h2 className='w-full flex gap-2 text-sm bg-slate-200 rounded-md p-2 text-gray-500 justify-center'>
+                                    <h2 className='w-full flex gap-2 text-sm bg-brand-purple rounded-md p-2 text-white justify-center'>
                                         <Ruler className='h-4 w-4' />{item?.area}
                                     </h2>
                                 </div>

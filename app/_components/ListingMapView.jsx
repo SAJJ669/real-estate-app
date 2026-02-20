@@ -97,8 +97,8 @@ function ListingMapView({ type }) {
             <div>
                 <Listing setCoordinates={setCoordinates} setBedroom={setBedCount} setBathroom={setBathroomCount} setParking={setParkingCount} setHomeType={setHomeType} searchedAddress={(value) => setSearchAddress(value)} handleSearchClick={handleSearchClick} listing={listing} />
             </div>
-            <div className='fixed right-10 md:w-[350px] lg:w-[450px] xl:w-[650px]'>
-                <MapSection listing={listing} coordinates={coordinates}/>
+            <div className='fixed right-10 md:w-[350px] lg:w-[450px] xl:w-[650px] rounded-2xl overflow-hidden border border-brand-purple/10 shadow-lg shadow-emerald-900'>
+                <MapSection listing={listing} coordinates={coordinates} />
             </div>
         </div>
     )
