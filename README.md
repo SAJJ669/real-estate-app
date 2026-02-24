@@ -1,6 +1,5 @@
 🏠 Real Estate Listing & Management Platform
-A modern, full-stack real estate application designed for users to list, manage, and view properties. 
-This platform features secure user authentication, real-time database management, and robust image handling.
+A modern, full-stack real estate application designed for users to list, manage, and view properties. This platform features secure user authentication, real-time database management, and robust image handling.
 
 🚀 Key Features
 1) User Authentication: Secure sign-in and profile management powered by Clerk.
