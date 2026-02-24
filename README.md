@@ -18,6 +18,23 @@ A modern, full-stack real estate application designed for users to list, manage,
 - Components: Shadcn/UI
 - Notifications: Sonner
 
+Installation
+1) Clone the repository:
+git clone https://github.com/your-username/your-repo-name.git
+
+2) Install dependencies:
+npm install
+
+3) Set up your environment variables in a .env.local file:
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_key
+CLERK_SECRET_KEY=your_key
+NEXT_PUBLIC_SUPABASE_URL=your_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_key
+NEXT_PUBLIC_IMAGE_URL=your_supabase_storage_url
+
+4) Run the development server:
+npm run dev
+
 
 
 ⚙️ Implementation Highlights: Route Protection
