@@ -21,25 +21,25 @@ A modern, full-stack real estate application designed for users to list, manage,
 
 Installation
 
-1) Clone the repository:
+1) Clone the repository: git clone https://github.com/your-username/your-repo-name.git
 
-git clone https://github.com/your-username/your-repo-name.git
-
-2) Install dependencies:
-
-npm install
+2) Install dependencies: npm install
 
 3) Set up your environment variables in a .env.local file:
 
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_key
-CLERK_SECRET_KEY=your_key
-NEXT_PUBLIC_SUPABASE_URL=your_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_key
-NEXT_PUBLIC_IMAGE_URL=your_supabase_storage_url
+- NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+- CLERK_SECRET_KEY=
+- NEXT_PUBLIC_CLERK_SIGN_UP_URL=
+- NEXT_PUBLIC_CLERK_SIGN_IN_URL=
+- NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL=
+- NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL=
+- NEXT_PUBLIC_SUPABASE_URL=
+- NEXT_PUBLIC_SUPABASE_API_KEY=
+- NEXT_PUBLIC_GEOAPIFY_AUTOCOMPLETE_KEY=
+- NEXT_PUBLIC_IMAGE_URL=
 
-4) Run the development server:
 
-npm run dev
+4) Run the development server: npm run dev
 
 ⚙️ Implementation Highlights: Route Protection
 1) The project utilizes a robust "Guard" pattern in the EditListing component to ensure data integrity:
