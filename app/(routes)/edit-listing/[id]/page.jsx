@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react'
 import { Label } from '@/components/ui/label'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
-import { Field, FieldDescription, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
@@ -36,15 +35,21 @@ import Loading from '../../add-new-listing/loading'
 
 const EditListing = () => {
     const params = usePathname()
-    const { user } = useUser()
+    const { user, isSignedIn, isLoaded } = useUser()
     const router = useRouter()
-    const [listing, setListing] = useState()
+    const [listing, setListing] = useState(null)
     const [images, setImages] = useState([])
     const [loader, setLoader] = useState(false);
 
     useEffect(() => {
+        if (!isLoaded) return
+
+        if (!isSignedIn) {
+            router.replace('/')
+            return
+        }
         user && verifyUser()
-    }, [user])
+    }, [user, isSignedIn, isLoaded])
 
     const onSubmitHandler = async (formValue) => {
         setLoader(true);
@@ -95,14 +100,12 @@ const EditListing = () => {
             .eq('createdBy', user?.primaryEmailAddress.emailAddress)
             .eq('id', params.split('/')[2])
 
-        if (data) {
-            setListing(data[0])
-            // console.log(data)
+        if (!data || data.length === 0) {
+            console.log("Access Denied or Listing not found");
+            router.replace('/'); // Force redirect to home
         }
 
-        if (data?.length <= 0) {
-            router.replace('/')
-        }
+        setListing(data[0]);
     }
 
     const publishBtnHandler = async () => {
@@ -116,9 +119,24 @@ const EditListing = () => {
         if (data) {
             setLoader(false)
             toast.success('Listing pubished successfully!')
+            router.push('/view-listings')
         }
 
     }
+
+    // Show loading while Clerk is loading OR while Supabase is verifying
+    if (!isLoaded) {
+        return (
+            <div className="flex flex-col items-center justify-center h-screen">
+                <Loading className="animate-spin h-10 w-10" />
+                <p className="mt-4 text-slate-500">Authenticating...</p>
+            </div>
+        );
+    }
+
+    // Only render the form if we found a listing
+    if (!listing) return null;
+
     return (
         <div className='px-10 md:px-36 my-10'>
             <h2 className='font-bold text-2xl'>Enter some more details for the listing</h2>

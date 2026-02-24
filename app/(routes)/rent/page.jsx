@@ -1,6 +1,7 @@
 "use client"
 import React, { useEffect, useState } from 'react'
 import ListingMapView from "../../_components/ListingMapView";
+import { supabase } from '../../../utils/supabase/client';
 
 function ForRent() {
   const [hasRentals, setHasRentals] = useState(false);

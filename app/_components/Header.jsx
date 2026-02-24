@@ -1,10 +1,10 @@
 "use client"
 import { Button } from '@/components/ui/button'
-import { UserButton, useUser } from '@clerk/nextjs'
+import { useClerk, UserButton, useUser } from '@clerk/nextjs'
 import { Plus } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import React, { useEffect } from 'react'
 import {
     DropdownMenu,
@@ -21,14 +21,16 @@ import Aurora from './Aurora';
 const Header = () => {
 
     const { user, isSignedIn, isLoaded } = useUser();
-
+    const router = useRouter()
     const path = usePathname();
+    const { signOut } = useClerk();
     // useEffect(() => {
     //     if (isLoaded) {
     //         console.log("isSignedIn:", isSignedIn);
     //         console.log("user:", user);
     //     }
     // }, [isLoaded]);
+
 
     return (
         <div className="p-3 px-10 flex justify-between shadow-sm fixed top-0 w-full bg-[#f1f3f4] z-10">
@@ -45,8 +47,8 @@ const Header = () => {
                 </ul>
             </div>
             <div className='flex items-center gap-3'>
-                <Link href={'/add-new-listing'}>
-                    <Button variant="brand" className="flex gap-2"><Plus className='h-5 w-5' />Post Add</Button>
+                <Link href={isSignedIn ? "/add-new-listing" : "/sign-in"}>
+                    <Button variant="brand" className="flex gap-2"><Plus className='h-5 w-5' />Post Ad</Button>
                 </Link>
                 <Link href={'/sign-in'}>
                     {isSignedIn ? <div className="flex flex-col items-center w-full scale-120">
@@ -86,7 +88,7 @@ const Header = () => {
 
                                 <DropdownMenuSeparator />
 
-                                <DropdownMenuItem className="text-red-600 focus:text-red-600">
+                                <DropdownMenuItem onClick={() => signOut({ redirectUrl: '/' })} className="text-red-600 focus:text-red-600">
                                     <LogOut className="mr-2 h-4 w-4" />
                                     <span>Log out</span>
                                 </DropdownMenuItem>

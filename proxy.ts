@@ -4,6 +4,8 @@ const isPublicRoute = createRouteMatcher([
   "/",
   "/sign-in(.*)",
   "/sign-up(.*)",
+  "/view-listing/(.*)", // Allow public to view property details
+  "/rent"                // Allow public to see the rent page
 ]);
 
 export default clerkMiddleware((auth, req) => {
